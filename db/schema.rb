@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727211350) do
+ActiveRecord::Schema.define(version: 20140816085824) do
 
   create_table "accounts", force: true do |t|
     t.string   "password_digest", null: false
