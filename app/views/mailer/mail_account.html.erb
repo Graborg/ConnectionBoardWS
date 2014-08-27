@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Hi! We are pleased to announce that the <%=@type_of_attachment%> 
-	<%= @attachment_title %> wants to make contact through ConnectionBoard!</h1>
-    <p>
-     	Here are the detail of the persons <%=@type_of_attachment%>:<br/>
-    </p>
-    <p><%=@attachment%>
-    <p> Here is the mail address from your admirer: <%=@from_mail%>
-    <p>Thank you for using ConnectionBoard and have a great day!</p>
-    <p> If you do not wish to receive these kinds of mails you can uncheck your profile or project from being shown in your profile view, through the app.
-  </body>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	</head>
+	<body>
+		<p> Hi! We are pleased to announce that
+			<%= @attachment_title %> wants to make contact through ConnectionBoard! </p>
+			<p> Here are the detail of the <%= @attachment.class.name.downcase %>: <br/></p>
+			<% @attachment.each do |title, value| %>
+				<p> <%= "#{title.capitalize} : #{value}" %> </p>
+			<% end %>
+			<p> Here is the mail address from your admirer: <%= @from %>
+			<p> Thank you for using ConnectionBoard and have a great day! </p>
+			<p> If you do not wish to receive these kinds of mails you can uncheck your profile or project from being shown in your profile view, through the app. </p>
+	</body>
 </html>

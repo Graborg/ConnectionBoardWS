@@ -4,9 +4,7 @@ class AccountsController < ApplicationController
 	before_filter :restrict_access, :only => [:update, :show]
 	
 	def login
-		#@account = Account.find_by_username(params[:username])
 		if @account = Account.find_by_username(params[:username]).try(:authenticate, params[:password])
-		#if @account.hashed_password == params[:password]  
 			@api_key = ApiToken.find_by_account_id(@account.id)[:access_token]
 			@response = Hash.new()
 			@response[:token] = @api_key 
@@ -23,17 +21,12 @@ class AccountsController < ApplicationController
 	end
 
 	def create
-		#Does the request come from a form?
-		if params.has_key?(:post)
-			#dparams = params[:post]
-	  	end
 	  	@account = Account.new(params.permit([:username]))
-	  	puts "hej"
 	  	@account.password = params[:password]
 	  	@account.password_confirmation = params[:password]
 	  	@account.save!
 	  	@api_key = @account.create_api_token
-	#	Mailer.welcome_email(@account).deliver
+		Mailer.welcome_email(@account).deliver
 		@response = Hash.new()
 		@response[:token] = @api_key[:access_token] 
 		@response[:account_id] = @account[:id].to_s
