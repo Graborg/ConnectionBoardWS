@@ -19,9 +19,9 @@ class MailController < ApplicationController
 
 	def get_dest_account
 		if params[:to_project_id]
-			account = Account.where_project(params[:to_project_id])
+			account = Account.where_project(params[:to_project_id]).first
 		elsif params[:to_person_id]
-			account = Account.where_person(params[:to_person_id])
+			account = Account.where_person(params[:to_person_id]).first
 		end
 	end
 
