@@ -1,6 +1,6 @@
 == README
 
-Does Capistrano work now?
+Does Capistrano work now? Well does it?
 
 
 This README would normally document whatever steps are necessary to get the
