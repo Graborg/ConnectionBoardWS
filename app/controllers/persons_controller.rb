@@ -11,35 +11,36 @@ class PersonsController < ApplicationController
 		# #Does the request come from a form?
 		# if params.has_key?(:post)
 		# 	dparams = params[:post]
-	 	# end
-	 	params[:account_id] = self.account_id
-	  	@person = Person.create(params.permit(:name, :expectations, :skills, :description, :mail, :account_id, :show_profile, :image))
-  	  	render :json => @person
+		# end
+		params[:account_id] = self.account_id
+		@person = Person.create!(params.permit(:name, :expectations, :skills, :description, :mail, :account_id, :show_profile, :image))
+		render :json => @person
 	end
 
 	def edit
-	  	@person = Person.find(params[:id])
+		@person = Person.find(params[:id])
 	end
 
 
 	def index
 		result = Hash.new()
 		result['persons'] = Person.all
- 		@persons = render :json => result
+		@persons = render :json => result
 	end
- 
+
 
 	def show
-  		@person = render :json => Person.find(params[:id])
+		@person = render :json => Person.find(params[:id])
 	end
 	
 	def update
-			@person = Person.find(params[:id])
-			if @person.update(params.permit(:name, :expectations, :skills, :description, :show_profile, :image))
-			  render :json => @person
-			else
-			  render 'edit'
-			end
+		@person = Person.find(params[:id])
+		puts "japp"
+		if @person.update(params.permit(:name, :expectations, :skills, :description, :show_profile, :image))
+			render :json => @person
+		else
+			render 'edit'
+		end
 	end
 
 	def restrict_access

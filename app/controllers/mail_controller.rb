@@ -1,35 +1,35 @@
 class MailController < ApplicationController
 	def mail_account
-  		if(params[:from_person_id])
-			@type_of_attachment = "person"
-		else
-			@type_of_attachment = "project"
+
+		source_addr = nil
+		dest_acc = get_dest_account
+		dest_addr = dest_acc.username
+
+		attachment = get_attachment
+		authenticate_or_request_with_http_token do |token, options|
+			source_acc = Account.where_token(token)
+			source_addr = source_acc.username
+			source_acc.id == attachment.account_id
 		end
-	 	if (params[:to_project_id])
-		 	@project_id = params[:project_id]
-		 	@project = Project.where(:id => @project_id)
-		 	if(@project[0][:show_project] == 0)
-		 		head :unauthorized
-		 	else
-		 		@to_account_id = @project[0][:account_id]
-		 		@attachment = @project
-		 	end
-		else
-			@person_id = params[:to_person_id]
-		 	@person = Person.where(:id => @person_id)
-		 	if(@person[0][:show_profile] == 0)
-		 		head :unauthorized
-		 	else
-		 		@to_account_id = @person[0][:account_id]
-		 		@attachment = @person
-		 	end
+		attachment = attachment.attributes.except!('id', 'account_id', 'show_profile', 'image')
+		Mailer.mail_account(attachment, source_addr, dest_addr).deliver
+	end
+
+	private
+
+	def get_dest_account
+		if params[:to_project_id]
+			account = Account.where_project(params[:to_project_id])
+		elsif params[:to_person_id]
+			account = Account.where_person(params[:to_person_id])
 		end
-		@to_mail = Account.where(:id => @to_account_id)[0][:username]
-	  	authenticate_or_request_with_http_token do |token, options|
-	  		@from_account = ApiToken.where(access_token: token) 
-	  		@from_mail = @from_account[0][:username]
-			Mailer.mail_account(@from_mail,
-				@to_mail, @type_of_attachment, @attachment).deliver
+	end
+
+	def get_attachment
+		if params[:attach_person_id]
+			attachment = Person.where(:id => params[:attach_person_id]).first
+		elsif params[:attach_project_id]
+			attachment = Project.where(:id => params[:attach_project_id]).first
 		end
- 	end
+	end
 end
