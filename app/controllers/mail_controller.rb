@@ -1,10 +1,10 @@
 class MailController < ApplicationController
 	def mail_account
 
+		puts "Obviously working"
 		source_addr = nil
 		dest_acc = get_dest_account
 		dest_addr = dest_acc.username
-
 		attachment = get_attachment
 		authenticate_or_request_with_http_token do |token, options|
 			source_acc = Account.where_token(token)
