@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  subheading: MyString
+  requested_skills: MyText
+  gains: MyText
+  description: MyText
+  time_plan: MyString
+  created_at: 2014-07-22 20:31:28
+  updated_at: 2014-07-22 20:31:28
+  account_id: 1
+  show_project: 1
+  image: 1
+
+two:
+  title: MyString
+  subheading: MyString
+  requested_skills: MyText
+  gains: MyText
+  description: MyText
+  time_plan: MyString
+  created_at: 2014-07-22 20:31:28
+  updated_at: 2014-07-22 20:31:28
+  account_id: 1
+  show_project: 1
+  image: 1
