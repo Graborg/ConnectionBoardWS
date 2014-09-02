@@ -27,7 +27,7 @@ private
 
 	def restrict_create
 		authenticate_or_request_with_http_token do |token, options|
-			@account_id = ApiToken.where(access_token: token).pluck(:account_id).first
+			@user_account = Account.where_token(token)
 		end
 	end
 

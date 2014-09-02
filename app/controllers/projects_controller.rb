@@ -14,25 +14,25 @@ class ProjectsController < ApplicationController
 		# if params.has_key?(:post)
 		# 	dparams = params[:post]
 	 #  	end
-	 	params[:account_id] = self.account_id
-	 	@project = Project.create(params.permit(:title, :subheading, :requested_skills, :gains, :mail, :description, :timeplan, :account_id, :show_project, :image))
-  	  	render :json => @project
+		params[:account_id] = @user_account.id
+		@project = Project.create(params.permit(:title, :subheading, :requested_skills, :gains, :mail, :description, :timeplan, :account_id, :show_project, :image))
+		render :json => @project
 	end
 
 	def edit
-	  	@project = Project.find(params[:id])
+		@project = Project.find(params[:id])
 	end
 
 
 	def index
 		result = Hash.new()
 		result['projects'] = Project.all
- 		@project = render :json => result
+		@project = render :json => result
 
 	end
 
 	def show
-  		@project = render :json => Project.find(params[:id])
+		@project = render :json => Project.find(params[:id])
 	end
 	
 	def update

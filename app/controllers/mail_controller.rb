@@ -1,18 +1,20 @@
 class MailController < ApplicationController
-	def mail_account
+	before_filter :restrict_create
 
-		puts "Obviously working"
-		source_addr = nil
+	def mail_account
+		source_addr = @user_account.username
+
 		dest_acc = get_dest_account
 		dest_addr = dest_acc.username
 		attachment = get_attachment
-		authenticate_or_request_with_http_token do |token, options|
-			source_acc = Account.where_token(token)
-			source_addr = source_acc.username
-			source_acc.id == attachment.account_id
+
+		#Compare the Token's userid with what the user wants to send
+		if @user_account.id == attachment.account_id
+			attachment = attachment.attributes.except!('id', 'account_id', 'show_profile', 'image')
+			Mailer.mail_account(attachment, source_addr, dest_addr).deliver
+		else
+			head :unauthorized
 		end
-		attachment = attachment.attributes.except!('id', 'account_id', 'show_profile', 'image')
-		Mailer.mail_account(attachment, source_addr, dest_addr).deliver
 	end
 
 	private

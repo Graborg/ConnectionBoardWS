@@ -12,7 +12,7 @@ class PersonsController < ApplicationController
 		# if params.has_key?(:post)
 		# 	dparams = params[:post]
 		# end
-		params[:account_id] = self.account_id
+		params[:account_id] = @user_account.id
 		@person = Person.create!(params.permit(:name, :expectations, :skills, :description, :mail, :account_id, :show_profile, :image))
 		render :json => @person
 	end
@@ -35,7 +35,6 @@ class PersonsController < ApplicationController
 	
 	def update
 		@person = Person.find(params[:id])
-		puts "japp"
 		if @person.update(params.permit(:name, :expectations, :skills, :description, :show_profile, :image))
 			render :json => @person
 		else
