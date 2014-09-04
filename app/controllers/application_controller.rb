@@ -10,12 +10,12 @@ class ApplicationController < ActionController::Base
 private
 
 	def restrict_access (type)
+
 		authenticate_or_request_with_http_token do |token, options|
 			@token_account_id = ApiToken.where(access_token: token)
 			if (type == 'project')
 				@param_account_id = Project.where(:id => @object_id)[0][:account_id]
 			elsif (type == 'person')
-				puts @token_account_id
 				@param_account_id = Person.where(:id => @object_id).pluck(:account_id).first
 			else
 				@param_account_id = Account.where(:id => @object_id)[0][:id]
@@ -27,7 +27,7 @@ private
 
 	def restrict_create
 		authenticate_or_request_with_http_token do |token, options|
-			@user_account = Account.where_token(token)
+			@user_account = ApiToken.find_by_access_token(token).account
 		end
 	end
 

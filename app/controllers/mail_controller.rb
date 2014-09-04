@@ -21,17 +21,17 @@ class MailController < ApplicationController
 
 	def get_dest_account
 		if params[:to_project_id]
-			account = Account.where_project(params[:to_project_id]).first
+			account = Account.find(params[:to_project_id]).account
 		elsif params[:to_person_id]
-			account = Account.where_person(params[:to_person_id]).first
+			account = Person.find(params[:to_person_id]).account
 		end
 	end
 
 	def get_attachment
 		if params[:attach_person_id]
-			attachment = Person.where(:id => params[:attach_person_id]).first
+			attachment = Person.find(params[:attach_person_id])
 		elsif params[:attach_project_id]
-			attachment = Project.where(:id => params[:attach_project_id]).first
+			attachment = Project.find(params[:attach_project_id])
 		end
 	end
 end
