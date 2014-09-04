@@ -38,14 +38,13 @@ class ProjectsController < ApplicationController
 	def update
 		@project = Project.find(params[:id])
 		if @project.update(params.permit(:title, :subheading, :requested_skills, :gains, :mail, :description, :timeplan, :show_project, :image))
-		  render :json => @project
+			render :json => @project
 		else
-		  render 'edit'
+			render 'edit'
 		end
 	end
 
-	def restrict_access
-		@object_id = params[:id]
-		super('project')
+	def get_account
+		Project.find(@object_id).account
 	end
 end

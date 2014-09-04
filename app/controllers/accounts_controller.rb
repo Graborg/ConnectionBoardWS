@@ -21,11 +21,11 @@ class AccountsController < ApplicationController
 	end
 
 	def create
-	  	@account = Account.new(params.permit([:username]))
-	  	@account.password = params[:password]
-	  	@account.password_confirmation = params[:password]
-	  	@account.save!
-	  	@api_key = @account.create_api_token
+		@account = Account.new(params.permit([:username]))
+		@account.password = params[:password]
+		@account.password_confirmation = params[:password]
+		@account.save!
+		@api_key = @account.create_api_token
 		Mailer.welcome_email(@account).deliver
 		@response = Hash.new()
 		@response[:token] = @api_key[:access_token] 
@@ -34,19 +34,19 @@ class AccountsController < ApplicationController
 	end
 
 	def edit
-	  	@account = Accounts.find(params[:id])
+		@account = Accounts.find(params[:id])
 	end
 
 
 	def index
 		result = Hash.new()
 		result['accounts'] = Account.joins(:api_token).select("access_token, account_id").all
- 		@accounts = render :json => result
+		@accounts = render :json => result
 	end
 
 
 	def show
-  		@account = render :json => Account.find(params[:id])
+		@account = render :json => Account.find(params[:id])
 	end
 	
 	def update
@@ -58,8 +58,7 @@ class AccountsController < ApplicationController
 		end
 	end
 
-	def restrict_access
-		@object_id = params[:id]
-		super('account')
+	def get_account
+		Account.find(params[:id])
 	end
 end

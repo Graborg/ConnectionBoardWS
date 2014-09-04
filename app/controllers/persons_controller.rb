@@ -1,7 +1,7 @@
 class PersonsController < ApplicationController
 	before_filter :restrict_access, :only => :update
 	before_filter :restrict_create, :only => :create
-	
+
 	def new
 		@person = Person.new()
 	end
@@ -42,8 +42,7 @@ class PersonsController < ApplicationController
 		end
 	end
 
-	def restrict_access
-		@object_id = params[:id]
-		super('person')
+	def get_account
+		Person.find(params[:id]).account
 	end
 end
