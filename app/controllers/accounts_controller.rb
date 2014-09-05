@@ -1,4 +1,4 @@
- require 'bcrypt'
+require 'bcrypt'
 
 class AccountsController < ApplicationController
 	before_filter :restrict_access, :only => [:update, :show]
