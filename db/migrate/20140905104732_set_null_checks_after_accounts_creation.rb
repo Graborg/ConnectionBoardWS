@@ -1,4 +1,4 @@
-class SetNullChecks < ActiveRecord::Migration
+class SetNullChecksAfterAccountsCreation < ActiveRecord::Migration
   def change
 	change_column_null :accounts, :password_digest, false
 	change_column_null :accounts, :username, false
