@@ -49,6 +49,7 @@ GEM
     coffee-script-source (1.7.1)
     colorize (0.7.3)
     erubis (2.7.0)
+    excon (0.39.5)
     execjs (2.2.1)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -71,6 +72,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill-api (1.0.52)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
     mime-types (1.25.1)
     minitest (5.4.0)
     multi_json (1.10.1)
@@ -151,6 +155,7 @@ DEPENDENCIES
   gibbon
   jbuilder (~> 2.0)
   jquery-rails
+  mandrill-api
   rails (= 4.1.4)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
