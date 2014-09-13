@@ -7,7 +7,7 @@ set :repo_url, 'git@github.com:Graborg/ConnectionBoardWS.git'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, "/home/ubuntu/workspace/Capistrano"
+set :deploy_to, "/home/ubuntu/workspace/Capistrano/ConnectionBoard"
 
 # Default value for :scm is :git
 set :scm, :git
