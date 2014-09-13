@@ -5,10 +5,12 @@ Rails.application.routes.draw do
   resources :api_tokens
 
   resources :projects
-  post 'accounts/login' => 'accounts#login' 
+  post 'accounts/login' => 'accounts#login'
   resources :accounts
   resources :persons
 
+  get ':controller/:action/'
+  get ':controller/' => 'controller#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
