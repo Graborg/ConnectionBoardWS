@@ -45,6 +45,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def get_account
-		Project.find(@object_id).account
+		Project.find(params[:id]).account
 	end
 end
