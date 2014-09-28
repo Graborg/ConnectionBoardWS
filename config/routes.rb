@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :persons
 
+  resources :password_resets
   get ':controller/:action/'
   get ':controller/' => 'controller#index'
   # The priority is based upon order of creation: first created -> highest priority.

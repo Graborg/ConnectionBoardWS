@@ -14,4 +14,9 @@ class Mailer < ActionMailer::Base
 		subject = "ConnectionBoard: #{@attachment_title} wants to make contact!"
 		mail(to: dest_addr, subject: subject)
 	end
+
+	def password_reset(account)
+		@account = account
+		mail(:to => account.username, :subject => "Connection Board password Reset")
+	end
 end
