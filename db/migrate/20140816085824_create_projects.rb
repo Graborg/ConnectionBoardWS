@@ -1,6 +1,6 @@
 class CreateProjects < ActiveRecord::Migration
   def change
-    unless table_exists? :people
+    unless table_exists? :projects
       create_table :projects do |t|
         t.string :title
         t.string :subheading
