@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 		# if params.has_key?(:post)
 		# 	dparams = params[:post]
 	 #  	end
-		params[:account_id] = @user_account.id
+		params[:account_id] = @token_account.id
 		@project = Project.create(params.permit(:title, :subheading, :requested_skills, :gains, :mail, :description, :timeplan, :account_id, :show_project, :image))
 		render :json => @project
 	end

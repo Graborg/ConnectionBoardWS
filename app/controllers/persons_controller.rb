@@ -12,7 +12,7 @@ class PersonsController < ApplicationController
 		# if params.has_key?(:post)
 		# 	dparams = params[:post]
 		# end
-		params[:account_id] = @user_account.id
+		params[:account_id] = @token_account.id
 		@person = Person.create!(params.permit(:name, :expectations, :skills, :description, :mail, :account_id, :show_profile, :image))
 		render :json => @person
 	end
