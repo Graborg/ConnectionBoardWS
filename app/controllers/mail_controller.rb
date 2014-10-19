@@ -14,6 +14,7 @@ class MailController < ApplicationController
 		if @user_account.id == attachment.account_id
 			attachment = attachment.attributes.except!('id', 'account_id', 'show_profile', 'image')
 			Mailer.mail_account(attachment, source_addr, dest_addr).deliver
+			render :json => "Successfully sent email from #{source_addr} to #{dest_addr}"
 		else
 			head :unauthorized
 		end
