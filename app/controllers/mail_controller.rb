@@ -2,13 +2,13 @@ class MailController < ApplicationController
 	before_filter :restrict_create
 
 	def mail_account
-		to_person = params.has_key?(:to_person_id) #To person? If not send to project
-		attach_person = params.has_key?(:attach_person_id) #Attach person? If not attach project
+		rec_is_person = params.has_key?(:to_person_id) #To person? If not send to project
+		sender_is_person = params.has_key?(:attach_person_id) #Attach person? If not attach project
 
 		source_addr = @user_account.username
-		dest_acc = get_details(to_person, params[:to_person_id] || params[:to_project_id]).account
+		dest_acc = get_details(rec_is_person, params[:to_person_id] || params[:to_project_id]).account
 		dest_addr = dest_acc.username
-		attachment = get_details(attach_person, params[:attach_person_id] || params[:attach_project_id])
+		attachment = get_details(sender_is_person, params[:attach_person_id] || params[:attach_project_id])
 
 		#Compare the Token's userid with what the user wants to send
 		if @user_account.id == attachment.account_id
