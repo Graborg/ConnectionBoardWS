@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928110500) do
+ActiveRecord::Schema.define(version: 20141018142819) do
 
   create_table "accounts", force: true do |t|
     t.string   "password_digest",        null: false
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20140928110500) do
   end
 
   add_index "api_tokens", ["account_id"], name: "index_api_tokens_on_account_id", unique: true
+
+  create_table "mail_logs", force: true do |t|
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "people", force: true do |t|
     t.string   "name"
