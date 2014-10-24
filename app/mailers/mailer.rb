@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-	default from: "connectionboard@gmail.com"
+	default from: "noreply@connectionboard.se"
 
 	def welcome_email(account)
 		@account = account
