@@ -1,9 +1,11 @@
 class MailController < ApplicationController
 	before_filter :restrict_create
 
+	@@admin_mapping = {1 => "IOS", 2 => "WP", 3 => "Android", 4 => "Web"}
+
 	def mail_account
 
-		rec_is_person = params.has_key?(:to_person_id) #To person? If not send to project
+		receiver_is_person = params.has_key?(:to_person_id) #To person? If not send to project
 		sender_is_person = params.has_key?(:attach_person_id) #Attach person? If not attach project
 
 		source_addr = @token_account.username
@@ -22,6 +24,13 @@ class MailController < ApplicationController
 		else
 			head :unauthorized
 		end
+	end
+
+	def mail_feedback
+		source_addr = @token_account.username
+		developer = @@admins.fetch(@@admin_mapping.fetch(params[:OS]))
+		Mailer.mail_feedback(params[:feedback], source_addr, developer).deliver
+		render :json => "Successfully sent email from #{source_addr} to #{developer}"
 	end
 
 	private

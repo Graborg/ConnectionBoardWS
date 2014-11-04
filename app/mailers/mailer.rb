@@ -19,4 +19,10 @@ class Mailer < ActionMailer::Base
 		@account = account
 		mail(:to => account.username, :subject => "Connection Board password Reset")
 	end
+
+	def mail_feedback(feedback, user, developer)
+		@user = user
+		@feedback = feedback
+		mail(:to => developer, :subject => "Feedback from #{user}")
+	end
 end

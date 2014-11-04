@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :null_session
 
+	@@admins = {"IOS" => "jacobarvidsson@me.com", "WP" => "jonathan.v@live.se",
+		"Android" => "oscar.axelsson14@gmail.com", "Web" => "mgraborg@gmail.com"}
+
 	private
 
 	def restrict_access
