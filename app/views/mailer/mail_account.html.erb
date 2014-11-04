@@ -6,7 +6,7 @@
 	<body>
 		<p> Hi! We are pleased to announce that
 			<%= @attachment_title %> wants to make contact through ConnectionBoard! </p>
-			<p> Here are the detail of the <%= @attachment.class.name.downcase %>: <br/></p>
+			<p> Here are the details of the <%= @attachment.class.name.downcase %>: <br/></p>
 			<% @attachment.each do |title, value| %>
 				<p> <%= "#{title.capitalize} : #{value}" %> </p>
 			<% end %>

@@ -12,7 +12,7 @@ class MailController < ApplicationController
 		attachment = get_details(sender_is_person, params[:attach_person_id] || params[:attach_project_id])
 
 
-		first_mail = first_mail_today?(@token_account.id, dest_acc.id) || params.has_key?(:devmode)
+		first_mail = first_mail_today?(@token_account.id, dest_acc.id) || true #params.has_key?(:devmode)
 		#Compare the Token's userid with what the user wants to send && if spam or not
 		if @token_account.id == attachment.account_id && first_mail
 			attachment = attachment.attributes.except!('id', 'account_id', 'show_profile', 'image')
