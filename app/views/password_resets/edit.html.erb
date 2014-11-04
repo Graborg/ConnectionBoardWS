@@ -10,12 +10,10 @@
 	</div>
 	<% end %>
 	<div class="field">
-		<%= f.label :password %>
-		<%= f.password_field :password %>
+		<%=f.text_field :password, class: 'form-control', autofocus: true, placeholder: 'New password'%>
 	</div>
 	<div class="field">
-		<%= f.label :password_confirmation %>
-		<%= f.password_field :password_confirmation %>
+		<%=f.text_field :password_confirmation, class: 'form-control', autofocus: true, placeholder: 'Confirm'%>
 	</div>
 	<div class="actions"><%= f.submit "Update Password" %></div>
 <% end %>
