@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'accounts#login'
+  root 'application#index'
   post "mail/mail_account"
   post "mail/mail_feedback"
   resources :api_tokens

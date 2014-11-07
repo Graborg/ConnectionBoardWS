@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
 	@@admins = {"IOS" => "jacobarvidsson@me.com", "WP" => "jonathan.v@live.se",
 		"Android" => "oscar.axelsson14@gmail.com", "Web" => "mgraborg@gmail.com"}
 
+	def index
+	end
+
 	private
 
 	def restrict_access

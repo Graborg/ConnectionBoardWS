@@ -9,12 +9,24 @@
 		</ul>
 	</div>
 	<% end %>
-	<div class="field">
-		<%=f.text_field :password, class: 'form-control', autofocus: true, placeholder: 'New password'%>
+
+<div class="row">
+<div class="form-control" id="form-control">
+	<%= image_tag("icon_96px.png", :alt => "Connectionboard", :class => "logo") %>
+
+	 <div class="row collapse form">
+	 	<div class="small-12 medium-5 columns form">
+			<%=f.text_field :password, class: 'form-control', autofocus: true, placeholder: 'New password'%>
+		</div>
 	</div>
-	<div class="field">
-		<%=f.text_field :password_confirmation, class: 'form-control', autofocus: true, placeholder: 'Confirm'%>
+
+
+	 <div class="row collapse">
+	 	<div class="small-12 medium-5 columns">
+		<%=f.text_field :password_confirmation, class: 'nej', autofocus: true, placeholder: 'Confirm'%>
+		</div>
 	</div>
 	<div class="actions"><%= f.submit "Update Password" %></div>
+</div>
 <% end %>
 

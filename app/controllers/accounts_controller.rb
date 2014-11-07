@@ -2,7 +2,7 @@ require 'bcrypt'
 
 class AccountsController < ApplicationController
 	before_filter :restrict_access, :only => [:update, :show]
-	
+
 	def login
 		if @account = Account.find_by_username(params[:username]).try(:authenticate, params[:password])
 			@api_key = ApiToken.find_by_account_id(@account.id)[:access_token]
