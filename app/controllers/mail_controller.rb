@@ -5,7 +5,7 @@ class MailController < ApplicationController
 
 	def mail_account
 
-		receiver_is_person = params.has_key?(:to_person_id) #To person? If not send to project
+		rec_is_person = params.has_key?(:to_person_id) #To person? If not send to project
 		sender_is_person = params.has_key?(:attach_person_id) #Attach person? If not attach project
 
 		source_addr = @token_account.username
@@ -15,7 +15,8 @@ class MailController < ApplicationController
 
 
 		first_mail = first_mail_today?(@token_account.id, dest_acc.id) || true #params.has_key?(:devmode)
-		#Compare the Token's userid with what the user wants to send && if spam or not
+		#Compare the sender's token's userid
+		# with who the user gives out to be && check if spam or not
 		if @token_account.id == attachment.account_id && first_mail
 			attachment = attachment.attributes.except!('id', 'account_id', 'show_profile', 'image')
 			Mailer.mail_account(attachment, source_addr, dest_addr).deliver

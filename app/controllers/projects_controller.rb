@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 		# 	dparams = params[:post]
 	 #  	end
 		params[:account_id] = @token_account.id
-		@project = Project.create(params.permit(:title, :subheading, :requested_skills, :gains, :mail, :description, :timeplan, :account_id, :show_project, :image))
+		@project = Project.create(params.permit(:title, :subheading, :requested_skills, :gains, :mail, :description, :time_plan, :account_id, :show_project, :image))
 		render :json => @project
 	end
 
