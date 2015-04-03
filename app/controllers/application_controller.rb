@@ -9,14 +9,18 @@ class ApplicationController < ActionController::Base
 
 	private
 
+	# Restrict access for updating
 	def restrict_access
 		authenticate_or_request_with_http_token do |token, options|
 			api_token = ApiToken.find_by_access_token(token)
 			param_account = self.get_account
+			# Does the api token exist and if so,
+			# does it have the same id as the requester supplied?
 			api_token && api_token.account_id == param_account.id
 		end
 	end
 
+	# Restricting creation
 	def restrict_create
 		authenticate_or_request_with_http_token do |token, options|
 			api_token = ApiToken.find_by_access_token(token)
